@@ -120,7 +120,7 @@ public:
 
             receiver_enu_estimate = gnss.receiver_enu_gt;
             double ecefX, ecefY, ecefZ;
-            ENUtoECEF(groundtruth_enu_frame.x(), groundtruth_enu_frame.y(), groundtruth_enu_frame.z(), gnss.Linearization_Point(0), gnss.Linearization_Point(1), gnss.Linearization_Point(2), ecefX, ecefY, ecefZ);
+            ENUtoECEF(groundtruth_enu_frame.x(), groundtruth_enu_frame.y(), groundtruth_enu_frame.z(), gnss.linearization_Point(0), gnss.linearization_Point(1), gnss.linearization_Point(2), ecefX, ecefY, ecefZ);
             std::vector<double> x = {ecefX, ecefY, ecefZ};
             ceres::Problem problem;
             k=0;
@@ -154,7 +154,7 @@ public:
             ECEFToLLA(receiver_ecef_estimate.x(), receiver_ecef_estimate.y(), receiver_ecef_estimate.z(), lat, lon, alt); 
             receiver_lla_estimate = Eigen::Vector3d(lat, lon, alt);
             double e,n,u;
-            LLAtoENU(lat, lon, alt, gnss.Linearization_Point(0), gnss.Linearization_Point(1), gnss.Linearization_Point(2), e, n, u);
+            LLAtoENU(lat, lon, alt, gnss.linearization_Point(0), gnss.linearization_Point(1), gnss.linearization_Point(2), e, n, u);
             receiver_enu_estimate = Eigen::Vector3d(e,n,u);
 
             if(receiver_enu_estimate(2)>200) {

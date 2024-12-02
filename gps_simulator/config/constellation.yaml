@@ -202,3 +202,11 @@ eccen:
   - 0.2400398254e-002
   - 0.8392333984e-002
   - 0.6222724915e-003
+
+linearization_point: 
+# choose this to be around your region of interested. It doesnt need to be precise, 
+# just close enough so the curvature of the earth doesnt make the linearization invalide
+- 47.36667
+- 8.55
+- 0 
+ 

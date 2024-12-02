@@ -34,7 +34,7 @@ public:
     int number_visible_satellites;
     std::vector<Emitter> emitters; // TODO : map the PRN to the emitters/satellite for more clarity
     
-    Eigen::Vector3d Linearization_Point;
+    Eigen::Vector3d linearization_Point;
 
 private:
     ros::NodeHandle nh_; 
