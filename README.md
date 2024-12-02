@@ -51,7 +51,7 @@ sudo apt-get install libblas-dev liblapack-dev libsuitesparse-dev
 
 ### Clone and compile
 
-TODO
+todo : Maybe here check the dependencie related to geographic-lib.
 
 Create a workspace and clone the code (`ROS-DISTRO`=`melodic`/`noetic`):
 ```sh
@@ -69,8 +69,19 @@ catkin build
 Refer to [SVO Pro](https://github.com/uzh-rpg/rpg_svo_pro_open#troubleshooting).
 
 ## Instructions
+To launch the programm run :
 
-We provide here and example on how to run the code [TODO]
+```sh
+roslaunch svo_ros Oerlikon.launch
+```
+Make sure you have all the config files as requested in the launch file.
+
+#### That's it already you are set! 
+
+This will launch : 
+- svo_ros with the global pose accepted as input to the optimizaqtion problem 
+- svo_registration, which will register the local point cloud to the global city twin.
+- rviz
 
 ## Credits
 
