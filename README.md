@@ -74,7 +74,8 @@ To launch the programm run :
 ```sh
 roslaunch svo_ros Oerlikon.launch
 ```
-Make sure you have all the config files as requested in the launch file.
+Make sure you have all the config files as requested in the launch file and play your rosbag in another terminal. 
+When using your own data, adjust the topic names in the launchfile.
 
 #### That's it already you are set! 
 
