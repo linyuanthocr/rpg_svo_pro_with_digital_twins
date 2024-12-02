@@ -1,7 +1,7 @@
 gps_noise_model_folder: '' 
-gps_noise_model_multipath: 'GMM_Multipath_Error.pkl'
-gps_noise_model_number_of_sat: 'GP_Classifier_Precomputed.joblib'
-gps_noise_model_number_of_sat_scaler: 'GP_Scaler.joblib'
+gps_noise_model_multipath: 'gmm_multipath_error_in_function_of_height.pkl'
+gps_noise_model_number_of_sat: 'gp_satellites_los_in_function_of_height.joblib'
+gps_noise_model_number_of_sat_scaler: 'gp_scaler.joblib'
 
 pseudorange_error_topic: '/gnss_simulator/multipath_error'
 number_of_satellite_topic: '/gnss_simulator/number_of_visible_satellites'

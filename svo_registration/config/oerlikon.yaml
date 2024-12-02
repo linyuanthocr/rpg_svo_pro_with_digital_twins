@@ -1,5 +1,5 @@
 registration_settings:
-  scale_factor_position: 6 
+  scale_factor_position: 9 #6 
   scale_factor_rotation: 2 
   max_correspondence_distance: 8 
   inliers_rmse_thr: 1.6
