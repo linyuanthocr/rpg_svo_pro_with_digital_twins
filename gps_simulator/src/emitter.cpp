@@ -71,7 +71,8 @@ void Emitter::emit_pseudorange(Eigen::Vector3d position_receiver_ECEF, Eigen::Qu
 
     R_enu_ecef << -std::sin(lon_receiver), std::cos(lon_receiver), 0,
         -std::sin(lat_receiver)*std::cos(lon_receiver), -std::sin(lat_receiver)*std::sin(lon_receiver), std::cos(lat_receiver),
-        std::cos(lat_receiver)*std::cos(lon_receiver), std::cos(lat_receiver)*std::sin(lon_receiver), std::sin(lat_receiver); // https://gssc.esa.int/navipedia/index.php/Transformations_between_ECEF_and_ENU_coordinates -> why doesn Sky-gvins have a different formula?
+        std::cos(lat_receiver)*std::cos(lon_receiver), std::cos(lat_receiver)*std::sin(lon_receiver), std::sin(lat_receiver); 
+        // https://gssc.esa.int/navipedia/index.php/Transformations_between_ECEF_and_ENU_coordinates 
 
     Eigen::Vector3d ENU_los_vec = R_enu_ecef * (ecef_los_vec); // los vector in body frame
 
@@ -99,13 +100,8 @@ void Emitter::emit_pseudorange(Eigen::Vector3d position_receiver_ECEF, Eigen::Qu
 
 double Emitter::calculate_pseudorange(Eigen::Vector3d position_receiver_ECEF) {
 
-    // double error = d(gen);
-
     Eigen::Vector3d line_of_sight = Position_ECEF - position_receiver_ECEF;
     pseudorange = line_of_sight.norm();
-
-    // pseudorange += error;
-
     return pseudorange;
 }
 

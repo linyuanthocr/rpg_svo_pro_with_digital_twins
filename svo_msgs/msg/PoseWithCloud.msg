@@ -1,0 +1,4 @@
+std_msgs/Header header
+geometry_msgs/PoseStamped pose
+sensor_msgs/PointCloud2 point_cloud
+bool initial_refinement

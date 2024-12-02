@@ -1,22 +1,14 @@
 cmake_minimum_required(VERSION 3.0.2)
 project(satellite_simulator)
 
-message(STATUS "Python path: ${PYTHONPATH}")
-
-list(APPEND CMAKE_MODULE_PATH "/usr/share/cmake/geographiclib")
-
-set(Ceres_DIR "/home/roxane/svo_ws/devel/lib/cmake/Ceres")
 find_package(Ceres REQUIRED)
-include_directories(${CERES_INCLUDE_DIRS})
-
-
 find_package(catkin REQUIRED COMPONENTS
   message_generation
   roscpp
   geometry_msgs
   std_msgs
-  
 )
+
 find_package(GeographicLib REQUIRED)
 find_package(Eigen3 REQUIRED yaml-cpp REQUIRED)
 
@@ -31,7 +23,7 @@ add_message_files(
 
 generate_messages(
   DEPENDENCIES
-  std_msgs  # Or any other message packages EmitterMsg.msg depends on
+  std_msgs  
   geometry_msgs
 )
 catkin_package(
@@ -59,6 +51,6 @@ target_link_libraries(gnss_simulator ${catkin_LIBRARIES} pthread yaml-cpp ${Geog
 
 
 install(PROGRAMS
-    script/Publish_MP_NSat.py
+    script/gps_error_publisher.py
     DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )

@@ -61,9 +61,9 @@ public:
         ecef_receiver_pub = nh_.advertise<geometry_msgs::PointStamped>("/gnss_simulator/ECEF", 1);
         enu_receiver_pub = nh_.advertise<geometry_msgs::PoseStamped>("/gnss_simulator/ENU", 1);
 
-        reciever_number_of_visible_satellites = nh_.subscribe<satellite_simulator::IntMsg>(number_of_satellite_topic, 1, &Receiver::N_Sat_Callback, this);
-        reciever_multipath_errors = nh_.subscribe(pseudorange_error_topic, 1, &Receiver::MP_Callback, this);
-        reciever_groundtruth = nh_.subscribe(ground_truth_topic, 1, &Receiver::GT_Callback, this);
+        reciever_number_of_visible_satellites = nh_.subscribe<satellite_simulator::IntMsg>(number_of_satellite_topic, 1, &Receiver::nSatLOSCallback, this);
+        reciever_multipath_errors = nh_.subscribe(pseudorange_error_topic, 1, &Receiver::multipathCallback, this);
+        reciever_groundtruth = nh_.subscribe(ground_truth_topic, 1, &Receiver::groundtruthCallback, this);
 
         receiver_enu_gt = Eigen::Vector3d::Zero();
         receiver_ecef_gt = Eigen::Vector3d::Zero();
@@ -77,16 +77,16 @@ public:
 
     void startReceiver();
 
-    void N_Sat_Callback(const satellite_simulator::IntMsg::ConstPtr& msg) {
+    void nSatLOSCallback(const satellite_simulator::IntMsg::ConstPtr& msg) {
         number_satellites_line_of_sight = msg->data.data;
     }
 
-    void GT_Callback(const geometry_msgs::PoseStamped::ConstPtr& msg) {
+    void groundtruthCallback(const geometry_msgs::PoseStamped::ConstPtr& msg) {
         groundtruth_enu_frame = Eigen::Vector3d(msg->pose.position.x, msg->pose.position.y, msg->pose.position.z); 
     }
 
 
-    void MP_Callback(const satellite_simulator::DoubleArrayMsg::ConstPtr& msg) {
+    void multipathCallback(const satellite_simulator::DoubleArrayMsg::ConstPtr& msg) {
         std::lock_guard<std::mutex> guard(data_mtx);
         satellites_range_errors_reciever.resize(satellites_range_errors.size()); // listens to the pseudorange generates by the python script 
         for (int i = 0; i < satellites_range_errors.size(); i++) 
