@@ -170,7 +170,7 @@ bool Estimator::addStates(const FrameBundleConstPtr& frame_bundle,
   SpeedAndBias speed_and_bias;
 
   // initialization or propagate the IMU
-  if (states_.ids.empty()) // currently considered state empty
+  if (states_.ids.empty()) 
   {
     if(is_reinit_) // backend reinitializing, from frame handler base 
     {
@@ -205,7 +205,7 @@ bool Estimator::addStates(const FrameBundleConstPtr& frame_bundle,
         return false;
       }
       speed_and_bias.setZero();
-      speed_and_bias.segment<3>(6) = imu_parameters_.at(0).a0; // [velocity, gyro biases, accel biases] -> why are we not setting the gyro biases ?
+      speed_and_bias.segment<3>(6) = imu_parameters_.at(0).a0; 
     }
 
 
@@ -216,9 +216,9 @@ bool Estimator::addStates(const FrameBundleConstPtr& frame_bundle,
     last_timestamp = states_.timestamps.back();
     // get the previous states
     BackendId T_WS_id = states_.ids.back();
-    BackendId speed_and_bias_id = changeIdType(T_WS_id, IdType::ImuStates); //this only changes the type of the id, not the value around it. SO it will have the same first 48 bits as T_WS_id
+    BackendId speed_and_bias_id = changeIdType(T_WS_id, IdType::ImuStates); 
 
-    T_WS = std::static_pointer_cast<ceres_backend::PoseParameterBlock>(map_ptr_->parameterBlockPtr(T_WS_id.asInteger()))->estimate(); //Returns what in the map with T_WS_id
+    T_WS = std::static_pointer_cast<ceres_backend::PoseParameterBlock>(map_ptr_->parameterBlockPtr(T_WS_id.asInteger()))->estimate(); 
 
     //! @todo not sure this is helpfull, used to need it but seems ok now.
     if(T_WS_id.asInteger() == 0)
@@ -340,7 +340,7 @@ bool Estimator::addStates(const FrameBundleConstPtr& frame_bundle,
   {
     for (size_t i = 0; i < extrinsics_estimation_parameters_.size(); ++i)
     {
-      const Transformation T_S_C = camera_rig_->get_T_C_B(i).inverse(); //T_S_C = transformation from body to cam ? s = body ?
+      const Transformation T_S_C = camera_rig_->get_T_C_B(i).inverse(); 
       cur_bundle_extrinsics_ids[i] = changeIdType(nframe_id, IdType::Extrinsics, i);
       std::shared_ptr<ceres_backend::PoseParameterBlock> extrinsics_parameter_block =
           std::make_shared<ceres_backend::PoseParameterBlock>(
@@ -521,10 +521,10 @@ bool Estimator::addStates(const FrameBundleConstPtr& frame_bundle,
   DEBUG_CHECK(!states_.findSlot(nframe_id).second) << "pose ID" << nframe_id << " was used before!";
 
   // add the pose states
-  std::shared_ptr<ceres_backend::PoseParameterBlock> pose_parameter_block = std::make_shared<ceres_backend::PoseParameterBlock>(T_WS, nframe_id.asInteger()); // here the constructor is called !!!
+  std::shared_ptr<ceres_backend::PoseParameterBlock> pose_parameter_block = std::make_shared<ceres_backend::PoseParameterBlock>(T_WS, nframe_id.asInteger()); 
 
   if (!map_ptr_->addParameterBlock(pose_parameter_block,
-                                   ceres_backend::Map::Pose6d)) // addt the pose parameter block /T_WS from integration of IMU) to the map
+                                   ceres_backend::Map::Pose6d)) 
   {
     return false;
   } 
@@ -597,7 +597,6 @@ bool Estimator::addStates(const FrameBundleConstPtr& frame_bundle,
   // add initial prior or IMU errors
   if (states_.ids.size() == 1) //initialization
   {
-    //VLOG(10) << "No initial prior.";
     // If initial orientation is not known: no initial prior.
     if(!gp_parameters_.initial_orientation_known)
     {
@@ -668,15 +667,6 @@ bool Estimator::addStates(const FrameBundleConstPtr& frame_bundle,
                                                         imu_parameters_.at(0),
                                                         last_timestamp,
                                                         measurement_to_add.front().timestamp_);
-
-
-
-
-
-
-
-
-
       map_ptr_->addResidualBlock(
                   gpError,
                   nullptr,
@@ -725,7 +715,7 @@ bool Estimator::addStates(const FrameBundleConstPtr& frame_bundle,
         else
         {
 
-          if(state_id_to_num_gp_errors_[last_kf_id.asInteger()] < gp_parameters_.max_num_residuals) //check when this parameter is changed!!!
+          if(state_id_to_num_gp_errors_[last_kf_id.asInteger()] < gp_parameters_.max_num_residuals) 
           {
 
             std::size_t slot_id = states_.findSlot(last_kf_id).first;
@@ -739,9 +729,7 @@ bool Estimator::addStates(const FrameBundleConstPtr& frame_bundle,
                                                               curr_kf_timestamp,
                                                               measurement_to_add.front().timestamp_);
 
-                                                                       
-            // more spefically, here -| -> parameterBlockPtr(last_kf_id.asInteger()) is null
-
+                                                                    
             if((!map_ptr_->parameterBlockExists(changeIdType(last_kf_id, IdType::ImuStates).asInteger()))){ // !map_ptr_->parameterBlockExists(last_kf_id.asInteger())) || 
               VLOG(10) << "Missing GP block " << changeIdType(last_kf_id, IdType::ImuStates).asInteger() << "in map";
               // continue;
@@ -983,8 +971,6 @@ bool Estimator::addStates(const FrameBundleConstPtr &frame_bundle,
     // last_kd_id = 0 if frame 0 is a keyframe (could happen in stereo) or
     // a keyframe has not been selected yet.
 
-
-    //I had commented those nect 11 lines, why ???
     if(last_kf_id.asInteger()==0)
     {
       if(states_.ids.size()>0)
@@ -1155,7 +1141,7 @@ bool Estimator::addStates(const FrameBundleConstPtr &frame_bundle,
         else
         {
 
-          if(state_id_to_num_gp_errors_[last_kf_id.asInteger()] < gp_parameters_.max_num_residuals) //check when this parameter is changed!!!
+          if(state_id_to_num_gp_errors_[last_kf_id.asInteger()] < gp_parameters_.max_num_residuals) 
           {
             std::size_t slot_id = states_.findSlot(last_kf_id).first;
             double curr_kf_timestamp = states_.timestamps[slot_id];
@@ -1168,7 +1154,7 @@ bool Estimator::addStates(const FrameBundleConstPtr &frame_bundle,
                                                               curr_kf_timestamp,
                                                               measurement_to_add.front().timestamp_);
 
-            if((!map_ptr_->parameterBlockExists(changeIdType(last_kf_id, IdType::ImuStates).asInteger()))){ // !map_ptr_->parameterBlockExists(last_kf_id.asInteger())) || 
+            if((!map_ptr_->parameterBlockExists(changeIdType(last_kf_id, IdType::ImuStates).asInteger()))){ 
               VLOG(10) << "Missing GP block " << changeIdType(last_kf_id, IdType::ImuStates).asInteger() << "in map";
               // continue;
             } else {
@@ -1206,7 +1192,7 @@ bool Estimator::addStates(const FrameBundleConstPtr &frame_bundle,
         double curr_kf_timestamp = states_.timestamps[slot_id];
 
         bool added_pose = false;
-        for(int n_meas = 0; n_meas < (static_cast<int>(states_.ids.size()) - 1); n_meas++) //TODO: not 3 but the suiz of KF in the window.
+        for(int n_meas = 0; n_meas < (static_cast<int>(states_.ids.size()) - 1); n_meas++) 
         {
           if(!added_pose) {
             if(abs(gpose_measurement.timestamp_ - LastNKeyframeStamp(n_meas)) < 1e-3){
@@ -1217,9 +1203,8 @@ bool Estimator::addStates(const FrameBundleConstPtr &frame_bundle,
 
                 Transformation T_MR = Transformation(measurement_to_add.front().position_, measurement_to_add.front().orientation_);
 
-                Eigen::Matrix<double,6,6> information =  Eigen::Matrix<double,6,6>::Constant(0.0);// Eigen::Matrix<double,6,6>::Zero();
+                Eigen::Matrix<double,6,6> information =  Eigen::Matrix<double,6,6>::Constant(0.0);
 
-                // Transformation T_n_kf = std::static_pointer_cast<ceres_backend::PoseParameterBlock>(map_ptr_->parameterBlockPtr(LastNKeyframeId(n_meas).asInteger()))->estimate(); 
                 Transformation T_vio_b_mr = T_MR; //*T_n_kf;
 
                 information = measurement_to_add.front().information_;
@@ -1387,7 +1372,7 @@ bool Estimator::addStates(const FrameBundleConstPtr &frame_bundle,
     BackendId T_WS_id = states_.ids.back();
     BackendId speed_and_bias_id = changeIdType(T_WS_id, IdType::ImuStates);
     T_WS = std::static_pointer_cast<ceres_backend::PoseParameterBlock>(
-          map_ptr_->parameterBlockPtr(T_WS_id.asInteger()))->estimate(); // returns what was previously filled up in PoseParameterBlock at this id (current estimate). Cast -> no construction.
+          map_ptr_->parameterBlockPtr(T_WS_id.asInteger()))->estimate(); 
 
     speed_and_bias = std::static_pointer_cast<ceres_backend::SpeedAndBiasParameterBlock>(
           map_ptr_->parameterBlockPtr(
@@ -1407,7 +1392,7 @@ bool Estimator::addStates(const FrameBundleConstPtr &frame_bundle,
     }
   }
 
-  std::shared_ptr<ceres_backend::PoseParameterBlock> pose_parameter_block = std::make_shared<ceres_backend::PoseParameterBlock>(T_WS, nframe_id.asInteger()); // here the constructor is called !!!
+  std::shared_ptr<ceres_backend::PoseParameterBlock> pose_parameter_block = std::make_shared<ceres_backend::PoseParameterBlock>(T_WS, nframe_id.asInteger()); 
 
   if (!map_ptr_->addParameterBlock(pose_parameter_block,
                                    ceres_backend::Map::Pose6d)) 
@@ -1446,7 +1431,8 @@ bool Estimator::addStates(const FrameBundleConstPtr &frame_bundle,
     {
       imu_meas_from_last_kf_.insert(imu_meas_from_last_kf_.begin(),
                                     imu_measurements.begin(),
-                                    imu_measurements.end()); // If there are keframes, insert the imu measurements from the last kf to the current frame. Will be 0 if the last state is a keyframe
+                                    imu_measurements.end()); 
+      // If there are keframes, insert the imu measurements from the last kf to the current frame. Will be 0 if the last state is a keyframe
     }
   }
 
@@ -1467,7 +1453,7 @@ bool Estimator::addStates(const FrameBundleConstPtr &frame_bundle,
     BackendId id = changeIdType(nframe_id, IdType::ImuStates);
     std::shared_ptr<ceres_backend::SpeedAndBiasParameterBlock> speed_and_bias_parameter_block =  std::make_shared<ceres_backend::SpeedAndBiasParameterBlock>(speed_and_bias, id.asInteger());
 
-    if(!map_ptr_->addParameterBlock(speed_and_bias_parameter_block)) // parametrization = 2 = Trivial here. Idk why but ok. 
+    if(!map_ptr_->addParameterBlock(speed_and_bias_parameter_block))
     {
       return false;
     } 
@@ -1502,7 +1488,6 @@ bool Estimator::addStates(const FrameBundleConstPtr &frame_bundle,
         const double sigma_bg = imu_parameters_.at(0).sigma_bg;
         const double sigma_ba = imu_parameters_.at(0).sigma_ba;
         std::shared_ptr<ceres_backend::SpeedAndBiasError > speed_and_bias_error = std::make_shared<ceres_backend::SpeedAndBiasError>(speed_and_bias, 1.0, sigma_bg*sigma_bg, sigma_ba*sigma_ba);
-        // add to map
 
         map_ptr_->addResidualBlock(
               speed_and_bias_error,
@@ -1531,7 +1516,7 @@ bool Estimator::addStates(const FrameBundleConstPtr &frame_bundle,
                       // all parameter block pointers : 
             map_ptr_->parameterBlockPtr(last_nframe_id.asInteger()),
             map_ptr_->parameterBlockPtr(changeIdType(last_nframe_id, IdType::ImuStates).asInteger()),
-            map_ptr_->parameterBlockPtr(nframe_id.asInteger()), // created in std::shared_ptr<ceres_backend::PoseParameterBlock> pose_parameter_block = std::make_shared<ceres_backend::PoseParameterBlock>(T_WS, nframe_id.asInteger());
+            map_ptr_->parameterBlockPtr(nframe_id.asInteger()), 
             map_ptr_->parameterBlockPtr(changeIdType(nframe_id, IdType::ImuStates).asInteger()));
     }
 
@@ -1548,7 +1533,7 @@ bool Estimator::addStates(const FrameBundleConstPtr &frame_bundle,
         double curr_kf_timestamp = states_.timestamps[slot_id];
 
         bool added_pose = false;
-        for(int n_meas = 0; n_meas < (static_cast<int>(states_.ids.size()) - 1); n_meas++) //TODO: not 3 but the suiz of KF in the window.
+        for(int n_meas = 0; n_meas < (static_cast<int>(states_.ids.size()) - 1); n_meas++) 
         {
           if(!added_pose) {
             if(abs(gpose_measurement.timestamp_ - LastNKeyframeStamp(n_meas)) < 1e-3){
@@ -1559,7 +1544,7 @@ bool Estimator::addStates(const FrameBundleConstPtr &frame_bundle,
 
                 Transformation T_MR = Transformation(measurement_to_add.front().position_, measurement_to_add.front().orientation_);
 
-                Eigen::Matrix<double,6,6> information =  Eigen::Matrix<double,6,6>::Constant(0.0);// Eigen::Matrix<double,6,6>::Zero();
+                Eigen::Matrix<double,6,6> information =  Eigen::Matrix<double,6,6>::Constant(0.0);
 
                 Transformation T_vio_b_mr = T_MR; 
 
