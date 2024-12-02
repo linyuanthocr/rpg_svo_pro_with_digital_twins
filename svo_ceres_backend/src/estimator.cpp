@@ -875,7 +875,6 @@ bool Estimator::addStates(const FrameBundleConstPtr &frame_bundle,
 - parameter block : the variable we are estimating, that is our pose, speed and biases
 - residual block :  error function, residuals */
 
-  std::cout << "Adding state imu_measurements + gp + gpose";
   BackendId nframe_id = createNFrameId(frame_bundle->getBundleId()); 
   double last_timestamp = 0;
   Transformation T_WS;
