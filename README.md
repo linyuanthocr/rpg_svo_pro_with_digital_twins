@@ -69,12 +69,14 @@ catkin build
 Refer to [SVO Pro](https://github.com/uzh-rpg/rpg_svo_pro_open#troubleshooting).
 
 ## Instructions
-To launch the programm run :
-
+To launch the programm on our custom dataset download the following files  :
+- rosbag [link](link.here).
+- city twin [link](link.here)
+Place them correctly as specified in the configuration file, and run : 
 ```sh
 roslaunch svo_ros Oerlikon.launch
 ```
-Make sure you have all the config files as requested in the launch file and play your rosbag in another terminal. 
+Make sure you have all the config files as requested in the launch file, and play your rosbag in another terminal. 
 When using your own data, adjust the topic names in the launchfile.
 
 #### That's it already you are set! 
