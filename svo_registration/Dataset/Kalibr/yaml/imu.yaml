@@ -1,0 +1,11 @@
+# Info derived from https://octopart.com/datasheet/icm-42688-p-invensense-102280765
+#Accelerometers
+accelerometer_noise_density: 0.012753   #Noise density (continuous-time) : 70×10^-6*9.81 = 0.00063765 rounded up  *10
+accelerometer_random_walk:   0.0004508866   #Bias random walk -> just did noise density/sqrt(200 = the freq), not sure this is correct, cf https://www.vectornav.com/resources/inertial-navigation-primer/specifications--and--error-budgets/specs-imuspecs # 0.00004508866 rounded *5 
+
+#Gyroscopes
+gyroscope_noise_density:     0.00073303815   # Noise density (continuous-time) # 2.8×(10^−3)*pi/180 = 0.00004886921 rounded up *15
+gyroscope_random_walk:       0.0002 #12094495   #Bias random walk same : abov/sqrt(freq) # 0.00000345557 rounded *30
+
+rostopic:                    /vio_module/imu_filtered      #the IMU ROS topic
+update_rate:                 200.0      #Hz (for discretization of the values above)

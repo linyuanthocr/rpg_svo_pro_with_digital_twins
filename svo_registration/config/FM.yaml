@@ -1,0 +1,8 @@
+scale_factor: 10 
+max_correspondence_distance: 10
+inliers_rmse_thr: 2 #1 #0.8 #1.0 #.5 #3 # 1.5
+max_translation_distance: 25 #10
+information_matrix_power: 1
+max_rotation_distance: 100 #5
+reference_map: "/home/roxane/svo_gps_ws/src/svo_volocopter/svo_registration/maps/Flightmare_ENU.ply"
+# reference_map: "/home/roxane/Desktop/CITY/CityAndPark/CityWithPark_Winter.ply"

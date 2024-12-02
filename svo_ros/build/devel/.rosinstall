@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/rox/svo_gps_ws/src/rpg_svo_pro_gps/svo_ros/build/devel/setup.sh

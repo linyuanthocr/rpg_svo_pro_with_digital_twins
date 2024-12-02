@@ -1,0 +1,70 @@
+label: "Flightmare"
+id: 412eab8e4058621f7036b5e765dfe812 # ?
+cameras:
+- camera:
+    label: cam0
+    id: 54812562fa109c40fe90b29a59dd7798
+    line-delay-nanoseconds: 0
+    image_height: 800
+    image_width: 800
+    type: pinhole # fisheye ?
+    intrinsics:
+      cols: 1
+      rows: 4
+      #  Kalibr intrinsic ds format:  [xi alpha fu fv pu pv] :
+      #  [0.0011832762171449219, 0.6470131805642294, 286.7453507053101, 286.94514727752403, 402.05559038891704, 408.84799887430125]
+      # data : [fx, fy, cx, cy] ->how to take xi and alpha into account 
+      data: [200, 200, 400, 400] # [424.97141237,  318.64697343, 636.0, 600.0] 
+      #data: [286.7453507053101, 286.94514727752403, 402.05559038891704, 408.84799887430125]
+      # [458.6548807207614, 457.2966964634893, 367.2158039615726, 248.37534060980727]
+    distortion:
+      type: radial-tangential  # fisheye  
+      parameters:
+        cols: 1
+        rows: 4
+        data: [0,0,0,0] # -0.02216820165861635, 0.003754640020819623,-0.0031896617660559096,0.00015846337168769477]  # no distortion -> the image is clearly distorted 
+  T_B_C:
+    cols: 4
+    rows: 4
+    # data: [0,0.5,0.86602540378,0,
+    #     -1,0,0,0,
+    #     0,-0.86602540378,0.5,0,
+    #     0,0,0,1]
+
+
+    # data: [1, 0, 0, 0,
+    #        0, 0, 1, 0,
+    #        0, -1, 0, 0,
+    #        0, 0, 0, 1]
+
+
+    data: [0, 0, 1, 0,
+           -1, 0, 0, 0,
+           0, -1, 0, 0,
+           0, 0, 0, 1]
+    # data: [0, -1, 0, 0,
+    #       0, 0, -1, 0,
+    #       1, 0, 0, 0,
+    #       0, 0, 0, 1] #sending pose from imu frame ->camera and imu at the same place 
+
+imu_params:
+  delay_imu_cam: 0.0
+  max_imu_delta_t: 0.01
+  acc_max: 176.0
+  omega_max: 17
+  sigma_omega_c: 1e-5
+  sigma_acc_c: 1e-4
+  sigma_omega_bias_c:  1e-8 #5
+  sigma_acc_bias_c: 1e-8 #5
+  sigma_integration: 1e-15
+  g: 9.8066
+  imu_rate: 200
+
+imu_initialization:
+  velocity: [0.0, 0, 0.0]
+  omega_bias: [0.0, 0, 0.0]
+  acc_bias: [0.0, 0.0, 0.0]
+  velocity_sigma: 1e-10
+  omega_bias_sigma: 1e-60
+  acc_bias_sigma: 1e-60
+

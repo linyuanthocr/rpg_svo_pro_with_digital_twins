@@ -1,0 +1,17 @@
+gpose_settings:
+  # Covariance.
+  variance_x: 10000
+  variance_y: 10000
+  variance_z: 10000
+
+  alignement_threshold: 0.001 #0.016 #001 #000000001 #0.001 # threshold - when variace of the yaw angle is below this value, the alignement is considered as successful
+  #TODO : also consider variance how the translation.
+
+  # position of point P (e.g. gps receiver) in body frame.
+  B_t_PB: [0.0, 0.0, 0.0]
+  # Max number of global residuals for each keyframe.
+  max_num_residuals: 1
+  # Initialize with a known orientaion.
+  # Set to true in the case the initial orientation is known (e.g. through an external motion capture system)
+  initial_orientation_known: false
+  refine_T_WL: true

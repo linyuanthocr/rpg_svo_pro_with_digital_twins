@@ -1,0 +1,50 @@
+label: "Euroc"
+id: 412eab8e4058621f7036b5e765dfe812
+cameras:
+- camera:
+    label: cam0 # Right camera, same position as imu
+    id: 54812562fa109c40fe90b29a59dd7798
+    line-delay-nanoseconds: 0
+    image_height:  768
+    image_width: 768
+    type: pinhole
+    intrinsics:
+      cols: 1
+      rows: 4
+      data: [611.9588338070289,458.8516417444384, 385.97336677336034,392.494078919] #375.5059210806708]
+    distortion:
+      type: radial-tangential  
+      parameters:
+        cols: 1
+        rows: 4
+        data: [-0.02216820165861635, 0.003754640020819623, -0.0031896617660559096, 0.00015846337168769477]
+  T_B_C:
+    cols: 4
+    rows: 4
+    data: [0,0.5,0.86602540378, 0,
+        -1, 0, 0, 0,
+        0,-0.86602540378,0.5, 0,
+        0, 0, 0, 1]
+    
+
+imu_params:
+  delay_imu_cam: 0.0
+  max_imu_delta_t: 0.01
+  acc_max: 176.0
+  omega_max: 17
+  sigma_omega_c: 12.0e-5
+  sigma_acc_c: 8.0e-4
+  sigma_omega_bias_c: 0.003
+  sigma_acc_bias_c: 0.01
+  sigma_integration: 0.0
+  g: 9.8066
+  imu_rate: 200
+
+imu_initialization:
+  velocity: [0.0, 0, 0.0]
+  omega_bias: [0.0, 0, 0.0]
+  acc_bias: [0.0, 0.0, 0.0]
+  velocity_sigma: 1.0
+  omega_bias_sigma: 0.001 #0.001
+  acc_bias_sigma: 0.001 #0.001
+
