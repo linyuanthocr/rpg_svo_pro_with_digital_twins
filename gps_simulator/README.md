@@ -22,10 +22,9 @@ The simulator models GPS signals by:
    - The receiver's ground truth pose in a cartesian frame.
 
 3. **Simulation**:
-   - Uses the ground truth pose and the GPS constellation's pseudoranges (corrupted with multipath errors).
-   - Trilaterates the receiver's position based on the pseudorange data.
+   - Uses the true GPS oribital data and trilaterates the receiver's position based on their corrupted pseudorange data.
 
-4. **Output Data**:
+4. **Output**:
    - Trilaterated receiver coordinates in ENU, LLA, or ECEF frames.
 
 ## Command
