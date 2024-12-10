@@ -1,6 +1,6 @@
 # Drift-free Visual SLAM using Digital Twins
 
-[![Tightly-coupled Fusion of Global Position Measurements in SVO Pro](doc/eyecatcher_with_youtube_logo.jpg)](https://youtu.be/-rk8imeU2Hw)
+[![Tightly-coupled Fusion of Global Position Measurements in SVO Pro](doc/eyecatcher_with_youtube_logo.jpg)](https://youtu.be/_59FvEnF06A)
 
 This repo contains a sliding-window optimization-based odometry system fusing visual, inertial and global pose measurements obtained by registering to a Digital Twin. 
 It builds on top of the visual-inertial odometry algorithm [SVO Pro](https://github.com/uzh-rpg/rpg_svo_pro_open).
@@ -67,9 +67,7 @@ catkin build
 Refer to [SVO Pro](https://github.com/uzh-rpg/rpg_svo_pro_open#troubleshooting).
 
 ## Instructions
-To launch the programm on our custom dataset download the following files  :
-- rosbag [link](link.here).
-- city twin [link](link.here)
+To launch the programm on our custom dataset download the rosbag and the city twin files from [here](https://download.ifi.uzh.ch/rpg/svo_with_digital_twins).
   
 Place them correctly as specified in the configuration file, and run : 
 ```sh
