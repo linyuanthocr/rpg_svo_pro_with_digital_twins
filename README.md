@@ -1,12 +1,12 @@
 # Drift-free Visual SLAM using Digital Twins
 
-<!-- [![Tightly-coupled Fusion of Global Position Measurements in SVO Pro](doc/images/git_img.png)](https://youtu.be/jC_KiRLs6CY) -->
+[![Tightly-coupled Fusion of Global Position Measurements in SVO Pro](doc/eyecatcher_with_youtube_logo.jpg)](https://youtu.be/-rk8imeU2Hw)
 
 This repo contains a sliding-window optimization-based odometry system fusing visual, inertial and global pose measurements obtained by registering to a Digital Twin. 
 It builds on top of the visual-inertial odometry algorithm [SVO Pro](https://github.com/uzh-rpg/rpg_svo_pro_open).
 
 ## Publication
-If you use this code in an academic context, please cite the following [RAL 2024 paper](https://rpg.ifi.uzh.ch/docs/IROS20_Cioffi.pdf).
+If you use this code in an academic context, please cite the following [RAL 2024 paper](https://rpg.ifi.uzh.ch/docs/RAL24_Merat.pdf).
 
 R. Merat (equal contribution), G. Cioffi (equal contribution), L. Bauersfeld, and D. Scaramuzza,
 "**Drift-free Visual SLAM using Digital Twins**,"
@@ -14,7 +14,7 @@ Robotics and Automation Letters (RA-L). 2024.
 
 ```
 @InProceedings{merat2020drift,
-  author={Merat, Roxane and Cioffi, Giovanni Bauersfeld, Leonard and Scaramuzza, Davide},
+  author={Merat, Roxane and Cioffi, Giovanni and Bauersfeld, Leonard and Scaramuzza, Davide},
   title={Drift-free Visual SLAM using Digital Twins},
   booktitle={Robotics and Automation Letters (RA-L)},
   organization={IEEE},
@@ -50,8 +50,6 @@ sudo apt-get install libblas-dev liblapack-dev libsuitesparse-dev
 ```
 
 ### Clone and compile
-
-todo : Maybe here check the dependencie related to geographic-lib.
 
 Create a workspace and clone the code (`ROS-DISTRO`=`melodic`/`noetic`):
 ```sh
