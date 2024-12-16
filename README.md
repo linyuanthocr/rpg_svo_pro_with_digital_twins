@@ -53,11 +53,11 @@ sudo apt-get install libblas-dev liblapack-dev libsuitesparse-dev
 
 Create a workspace and clone the code (`ROS-DISTRO`=`melodic`/`noetic`):
 ```sh
-mkdir svo_gps_ws && cd svo_gps_ws
+mkdir catkin_ws && cd catkin_ws
 catkin config --init --mkdirs --extend /opt/ros/<ROS-DISTRO> --cmake-args -DCMAKE_BUILD_TYPE=Release
 cd src
-git clone git@github.com:uzh-rpg/rpg_svo_pro_gps.git
-vcs-import < ./rpg_svo_pro_gps/dependencies.yaml
+git clone git@github.com:uzh-rpg/rpg_svo_pro_with_digital_twins.git
+vcs-import < ./rpg_svo_pro_with_digital_twins/dependencies.yaml
 touch minkindr/minkindr_python/CATKIN_IGNORE
 catkin build
 ```
