@@ -6,19 +6,19 @@ This repo contains a sliding-window optimization-based odometry system fusing vi
 It builds on top of the visual-inertial odometry algorithm [SVO Pro](https://github.com/uzh-rpg/rpg_svo_pro_open).
 
 ## Publication
-If you use this code in an academic context, please cite the following [RAL 2024 paper](https://rpg.ifi.uzh.ch/docs/RAL24_Merat.pdf).
+If you use this code in an academic context, please cite the following [RAL 2025 paper](https://rpg.ifi.uzh.ch/docs/RAL24_Merat.pdf).
 
 R. Merat (equal contribution), G. Cioffi (equal contribution), L. Bauersfeld, and D. Scaramuzza,
 "**Drift-free Visual SLAM using Digital Twins**,"
-Robotics and Automation Letters (RA-L). 2024.
+Robotics and Automation Letters (RA-L). 2025.
 
 ```
-@InProceedings{merat2020drift,
-  author={Merat, Roxane and Cioffi, Giovanni and Bauersfeld, Leonard and Scaramuzza, Davide},
+@article{merat2025drift,
   title={Drift-free Visual SLAM using Digital Twins},
-  booktitle={Robotics and Automation Letters (RA-L)},
-  organization={IEEE},
-  year = {2024}
+  author={Merat, Roxane and Cioffi, Giovanni and Bauersfeld, Leonard and Scaramuzza, Davide},
+  journal={IEEE Robotics and Automation Letters},
+  year={2025},
+  publisher={IEEE}
 }
 ```
 
