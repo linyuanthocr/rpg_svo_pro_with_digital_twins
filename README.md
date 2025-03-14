@@ -80,6 +80,8 @@ rospack list
 
 If these commands execute successfully, your ROS Noetic environment is set up correctly.
 
+[Next, Enable GUI in Your Existing Docker Container](rviz_on_docker.md)
+
 ### Install dependences
 
 Install [catkin tools](https://catkin-tools.readthedocs.io/en/latest/installing.html) and [vcstools](https://github.com/dirk-thomas/vcstool) if you haven't done so before. Depending on your operating system, run
