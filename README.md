@@ -1,5 +1,8 @@
 # Drift-free Visual SLAM using Digital Twins
 
+This is a fork of the official implementation of **"Drift-free Visual SLAM using Digital Twin."** The original version was only tested on Ubuntu 20.04 and Ubuntu 18.04. The following instructions guide you through the installation on **Ubuntu 22.04**.
+
+
 [![Tightly-coupled Fusion of Global Position Measurements in SVO Pro](doc/eyecatcher_with_youtube_logo.jpg)](https://youtu.be/gmHnhWYfuW0)
 
 This repo contains a sliding-window optimization-based odometry system fusing visual, inertial and global pose measurements obtained by registering to a Digital Twin. 
@@ -22,21 +25,64 @@ Robotics and Automation Letters (RA-L). 2025.
 }
 ```
 
-## Install
+## Install on Ubuntu 22.04
 
-The code has been tested on
+## Installation on Ubuntu 22.04 with ROS Noetic
 
-* Ubuntu 18.04 with ROS Melodic
-* Ubuntu 20.04 with ROS Noetic
+### Setting Up Docker
+
+On the host machine, run the following commands to install and configure Docker:
+
+```bash
+sudo apt update
+sudo apt install -y docker.io
+sudo systemctl enable --now docker
+sudo usermod -aG docker $USER  # Allow running Docker without sudo
+
+```
+
+Log out and log back in to apply the group changes.
+
+### Running ROS Noetic in Docker
+
+Pull and run the ROS Noetic container:
+
+```bash
+docker pull osrf/ros:noetic-desktop-full
+
+docker run -it -d --name ros_noetic --net=host -v ~/ros_ws:/root/ros_ws osrf/ros:noetic-desktop-full bash
+```
+
+### Testing the Environment
+
+After starting the container, you are now inside a ROS Noetic environment running on **Ubuntu 20.04** within Docker.
+
+To test the setup, enter the container:
+
+```bash
+docker exec -it ros_noetic bash
+
+```
+
+Then, run the following commands:
+
+```bash
+roscore  # Start the ROS master
+
+```
+
+or check available ROS packages:
+
+```bash
+rospack list
+
+```
+
+If these commands execute successfully, your ROS Noetic environment is set up correctly.
 
 ### Install dependences
 
 Install [catkin tools](https://catkin-tools.readthedocs.io/en/latest/installing.html) and [vcstools](https://github.com/dirk-thomas/vcstool) if you haven't done so before. Depending on your operating system, run
-```sh
-# For Ubuntu 18.04 + Melodic
-sudo apt-get install python-catkin-tools python-vcstool
-```
-or
 ```sh
 # For Ubuntu 20.04 + Noetic
 sudo apt-get install python3-catkin-tools python3-vcstool python3-osrf-pycommon
